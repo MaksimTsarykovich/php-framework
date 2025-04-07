@@ -1,0 +1,65 @@
+services:
+  php:
+    build: ./php/
+    container_name: transaction-php
+    restart: always
+    volumes:
+      - ../:/var/www/html
+    ports:
+      - "9000:9000"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: transaction-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ../:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - app-network
+
+
+  db:
+    build: ./mysql/
+    container_name: transaction-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+          - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: transaction-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8001:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+
+networks:
+  app-network:
+    driver: bridge
