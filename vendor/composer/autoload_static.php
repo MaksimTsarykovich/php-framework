@@ -33,7 +33,9 @@ class ComposerStaticInit5a407113c898c122a0ef3441816d4819
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
+            'Psr\\Cache\\' => 10,
         ),
         'L' => 
         array (
@@ -45,6 +47,8 @@ class ComposerStaticInit5a407113c898c122a0ef3441816d4819
         ),
         'D' => 
         array (
+            'Doctrine\\Deprecations\\' => 22,
+            'Doctrine\\DBAL\\' => 14,
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
         ),
@@ -79,9 +83,17 @@ class ComposerStaticInit5a407113c898c122a0ef3441816d4819
         array (
             0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
         'League\\Container\\' => 
         array (
@@ -90,6 +102,14 @@ class ComposerStaticInit5a407113c898c122a0ef3441816d4819
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Doctrine\\Deprecations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
+        ),
+        'Doctrine\\DBAL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/dbal/src',
         ),
         'Database\\Seeders\\' => 
         array (

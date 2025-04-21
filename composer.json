@@ -15,6 +15,6 @@
     }
   ],
   "require": {
-    "tmi/php-framework": "dev-main"
+    "tmi/php-framework": "dev-master"
   }
 }

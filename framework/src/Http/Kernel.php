@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tmi\Framework\Http;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Tools\DsnParser;
 use League\Container\Container;
 use Tmi\Framework\Http\Exceptions\HttpException;
 use Tmi\Framework\Routing\Router;
