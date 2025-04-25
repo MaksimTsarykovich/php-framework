@@ -1,7 +1,8 @@
-{% extends 'default.html.twig' %}
+{% extends 'layouts/default.html.twig' %}
 
 {% block main %}
     <div class="bg-body-tertiary p-5 rounded">
-        <h2>Hello World - {{ postId }}!!!</h2>
+        <h2> {{ post.title }}!!!</h2>
+        <p>{{ post.content }}</p>
     </div>
 {% endblock %}

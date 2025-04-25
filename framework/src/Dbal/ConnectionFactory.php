@@ -17,7 +17,6 @@ class ConnectionFactory
     {
         $connection = DriverManager::getConnection( $this->databaseUrl);
 
-        $connection->setAutoCommit(false);
 
         return $connection;
     }

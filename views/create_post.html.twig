@@ -1,21 +1,20 @@
-{% extends 'default.html.twig' %}
+{% extends 'layouts/default.html.twig' %}
 
 {% block main %}
-    <form>
-        <fieldset disabled>
-            <legend>Disabled fieldset example</legend>
+    <div class="bg-body-tertiary p-5 rounded">
+        <form action="/posts" method="post">
             <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Disabled input</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                <label for="title" class="form-label">Заголовок</label>
+                <input type="text" value="Lorem ipsum dolor sit amet." name="title" class="form-control" id="title" aria-describedby="titleHelp" required>
+                <div id="titleHelp" class="form-text">Дайте своему посту броский заголовок.</div>
             </div>
             <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                <select id="disabledSelect" class="form-select">
-                    <option>Disabled select</option>
-                </select>
+                <label for="content" class="form-label">Контент</label>
+                <textarea name="content" id="content" cols="30" rows="10" class="form-control" required>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam consectetur nisi officia quae quis ut vitae. Aliquam aperiam enim hic ipsa minima nisi odio quod unde. Commodi cupiditate expedita fuga illo sunt vel voluptas? Consequatur distinctio expedita fugiat ipsum maiores minima nobis nostrum obcaecati odio pariatur possimus praesentium, ratione voluptate? Autem mollitia, repudiandae. Blanditiis deleniti ea eaque et fugiat laboriosam mollitia nam odit omnis provident quasi quis rem sed sint vero, voluptates, voluptatibus. Adipisci dignissimos doloribus eaque esse et ex expedita harum minus neque nihil non odit repudiandae, suscipit ullam veniam. Cum dicta, ducimus error incidunt nam non quasi sequi?
+                </textarea>
             </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </fieldset>
-    </form>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
 {% endblock %}
