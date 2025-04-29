@@ -7,6 +7,7 @@ use App\Services\PostService;
 use Tmi\Framework\Controller\AbstractController;
 use Tmi\Framework\Http\RedirectResponse;
 use Tmi\Framework\Http\Response;
+use Tmi\Framework\Session\SessionInterface;
 
 class PostController extends AbstractController
 {
@@ -38,6 +39,8 @@ class PostController extends AbstractController
         );
 
         $post = $this->service->save($post);
+
+        $this->request->getSession()->setFlash('success','Пост успешно создан!');
 
         return new RedirectResponse("/posts/{$post->getId()}");
     }
