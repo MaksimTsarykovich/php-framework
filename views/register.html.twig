@@ -1,0 +1,45 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block main %}
+    <div class="bg-body-tertiary p-5 rounded">
+        {% if session().hasFlash('error') %}
+            <div class="alert alert-danger">
+            <ul class="m-0">
+                {% for error in session().getFlash('error') %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if session().hasFlash('success') %}
+            <div class="alert alert-success">
+                {{ session().getFlash('success')[0] }}
+            </div>
+        {% endif %}
+        <form method="post" action="/register">
+            <div class="mb-3">
+                <label for="name" class="form-label">Имя</label>
+                <input name="name" type="text" class="form-control" id="name" placeholder="Введите ваше имя" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Электронная почта</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="Введите вашу почту"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input name="password" type="password" class="form-control" id="password" value="123123123" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Подтверждение пароля</label>
+                <input name="confirm_password" type="password" class="form-control" id="confirm_password"
+                       value="123123123" required>
+            </div>
+            <button type="submit" class="btn btn-outline-warning">Зарегестрироваться</button>
+        </form>
+
+    </div>
+{% endblock %}

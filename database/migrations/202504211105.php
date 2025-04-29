@@ -14,10 +14,7 @@ return new class
         ]);
         $table->addColumn("title", Types::STRING, ['length' => 255]);
         $table->addColumn("content", Types::TEXT);
-        $table->addColumn("created_at", Types::DATETIME_IMMUTABLE,
-        [
-            'default' => 'CURRENT_TIMESTAMP'
-        ]);
+        $table->addColumn("created_at", Types::DATETIME_IMMUTABLE, ['default' => 'CURRENT_TIMESTAMP']);
         $table->setPrimaryKey(['id']);
     }
 
