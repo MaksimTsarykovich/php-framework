@@ -5,7 +5,8 @@ namespace App\Controllers;
 use App\Entities\Post;
 use App\Services\PostService;
 use Tmi\Framework\Controller\AbstractController;
-use \Tmi\Framework\Http\Response;
+use Tmi\Framework\Http\RedirectResponse;
+use Tmi\Framework\Http\Response;
 
 class PostController extends AbstractController
 {
@@ -33,10 +34,11 @@ class PostController extends AbstractController
     {
         $post = Post::create(
             $this->request->postData['title'],
-            $this->request->postData['body']
+            $this->request->postData['content']
         );
 
         $post = $this->service->save($post);
 
+        return new RedirectResponse("/posts/{$post->getId()}");
     }
 }
