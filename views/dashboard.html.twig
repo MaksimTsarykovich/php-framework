@@ -1,0 +1,12 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block main %}
+<div class="bg-body-tertiary p-5 rounded">
+    {% if session().hasFlash('success') %}
+        <div class="alert alert-success">
+           {{ session().getFlash('success')[0] }}
+        </div>
+    {% endif %}
+    <h1>Dashboard</h1>
+</div>
+{% endblock %}

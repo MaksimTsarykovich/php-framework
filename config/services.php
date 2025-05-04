@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\UserService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Tools\DsnParser;
 use League\Container\Argument\Literal\ArrayArgument;
@@ -8,11 +9,14 @@ use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Dotenv\Dotenv;
+use Tmi\Framework\Authentication\SessionAuthentication;
+use Tmi\Framework\Authentication\SessionAuthInterface;
 use Tmi\Framework\Console\Application;
 use Tmi\Framework\Console\Commands\MigrateCommand;
 use Tmi\Framework\Controller\AbstractController;
 use Tmi\Framework\Dbal\ConnectionFactory;
 use Tmi\Framework\Http\Kernel;
+use Tmi\Framework\Http\Middleware\ExtractRouteInfo;
 use Tmi\Framework\Http\Middleware\RequestHandler;
 use Tmi\Framework\Http\Middleware\RequestHandlerInterface;
 use Tmi\Framework\Http\Middleware\RouterDispatch;
@@ -46,9 +50,6 @@ $container->add('APP_ENV', new StringArgument($appEnv));
 
 $container->add(RouteInterface::class, Router::class);
 
-$container->extend(RouteInterface::class)
-    ->addMethodCall('registerRoutes', [new ArrayArgument($routes)]);
-
 $container->add(RequestHandlerInterface::class, RequestHandler::class)
     ->addArgument($container);
 
@@ -66,6 +67,7 @@ $container->add('twig-factory', TwigFactory::class)
     ->addArguments([
         new StringArgument($viewsPath),
         SessionInterface::class,
+        SessionAuthInterface::class,
     ]);
 
 $container->addShared('twig', function () use ($container) {
@@ -102,6 +104,15 @@ $container->add(RouterDispatch::class)
         RouteInterface::class,
         $container,
     ]);
+
+$container->add(SessionAuthInterface::class, SessionAuthentication::class)
+    ->addArguments([
+        UserService::class,
+        SessionInterface::class
+    ]);
+
+$container->add(ExtractRouteInfo::class)
+    ->addArgument(new ArrayArgument($routes));
 
 
 return $container;

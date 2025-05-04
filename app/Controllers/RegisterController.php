@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Forms\User\RegisterForm;
 use App\Services\UserService;
+use Tmi\Framework\Authentication\SessionAuthInterface;
 use Tmi\Framework\Controller\AbstractController;
 use Tmi\Framework\Http\RedirectResponse;
 use Tmi\Framework\Http\Response;
@@ -12,7 +13,8 @@ class RegisterController extends AbstractController
 {
 
     public function __construct(
-        private UserService $userService
+        private UserService $userService,
+        private SessionAuthInterface $auth,
     )
     {
     }
@@ -44,6 +46,8 @@ class RegisterController extends AbstractController
 
         $this->request->getSession()->setFlash('success',"Пользователь {$user->getEmail()} успешно зарегестрирован");
 
-        return new RedirectResponse('/register');
+        $this->auth->login($user);
+
+        return new RedirectResponse('/dashboard');
     }
 }

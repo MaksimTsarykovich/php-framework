@@ -9,5 +9,4 @@ interface RouteInterface
 {
     public function dispatch(Request $request, Container $container);
 
-    public function registerRoutes(array $routes);
 }

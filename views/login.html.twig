@@ -1,0 +1,25 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block main %}
+    <div class="bg-body-tertiary p-5 rounded">
+        {% if session().hasFlash('error') %}
+            <div class="alert alert-danger">
+           {{ session().getFlash('error')[0] }}
+        </div>
+        {% endif %}
+        <form method="post" action="/login">
+            <div class="mb-3">
+                <label for="email" class="form-label">Электронная почта</label>
+                <input name="email" type="email" class="form-control" id="email" value="rixedawol@mailinator.com" placeholder="Введите вашу почту"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input name="password" type="password" class="form-control" id="password" value="123123123" required>
+            </div>
+            <button type="submit" class="btn btn-outline-warning">Войти</button>
+        </form>
+
+    </div>
+{% endblock %}

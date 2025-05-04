@@ -8,7 +8,7 @@ use Tmi\Framework\Http\Request;
 use Tmi\Framework\Http\Response;
 use Tmi\Framework\Session\SessionInterface;
 
-class Authenticate implements MiddlewareInterface
+class Guest implements MiddlewareInterface
 {
 
     private bool $authenticated = false;
@@ -24,9 +24,8 @@ class Authenticate implements MiddlewareInterface
     {
         $this->session->start();
 
-        if (!$this->auth->check()) {
-            $this->session->setFlash('error','Чтобы продолжить, нужно войти');
-        return new RedirectResponse('/login');
+        if ($this->auth->check()) {
+        return new RedirectResponse('/dashboard');
         }
         return $handler->handle($request);
     }
