@@ -802,7 +802,7 @@
             "dist": {
                 "type": "path",
                 "url": "framework",
-                "reference": "a012cf1362458d9cad715e6fd5e306a315a56d06"
+                "reference": "5fe493403adb9da363d93c7e46aca1944f5961e6"
             },
             "require": {
                 "doctrine/dbal": "^4.2.3",
@@ -810,6 +810,7 @@
                 "nikic/fast-route": "^1.3",
                 "psr/event-dispatcher": "^1.0.0",
                 "symfony/dotenv": "^7.2.0",
+                "symfony/polyfill-mbstring": "v1.32.0",
                 "twig/twig": "^3.20.0"
             },
             "require-dev": {

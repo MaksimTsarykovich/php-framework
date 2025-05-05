@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de53a3d7d8582afd523baed8f2e4c678",
+    "content-hash": "2653dcfe6c9a1fc4a88055f4b1d16249",
     "packages": [
         {
             "name": "doctrine/dbal",
@@ -2717,6 +2717,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "phpunit/phpunit": 20,
+        "symfony/polyfill-mbstring": 20,
         "symfony/var-dumper": 20
     },
     "prefer-stable": false,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\EventServiceProvider;
 use App\Services\UserService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Tools\DsnParser;
@@ -31,17 +32,20 @@ use Twig\Loader\FilesystemLoader;
 use Tmi\Framework\Console\Kernel as ConsoleKernel;
 
 $dotenv = new Dotenv;
-$dotenv->load(BASE_PATH . '/.env');
+$dotenv->load(dirname(__DIR__) . '/.env');
 // Application parameters
 
-$routes = include BASE_PATH . '/routes/web.php';
+$basePath = dirname(__DIR__);
+$routes = include $basePath . '/routes/web.php';
 $appEnv = $_ENV['APP_ENV'] ?? 'local';
-$viewsPath = BASE_PATH . '/views';
+$viewsPath = $basePath . '/views';
 $databaseUrl = 'pdo-mysql://user:password@framework-db:3306/app';
 
 // Application services
 
 $container = new Container;
+
+$container->add('base-path',new StringArgument($basePath));
 
 $container->delegate(new ReflectionContainer(true));
 
@@ -100,7 +104,7 @@ $container->add(Application::class)
 
 $container->add('console:migrate', MigrateCommand::class)
     ->addArgument(Connection::class)
-    ->addArgument(new StringArgument(BASE_PATH . '/database/migrations'));
+    ->addArgument(new StringArgument($basePath . '/database/migrations'));
 
 $container->add(RouterDispatch::class)
     ->addArguments([
@@ -116,6 +120,7 @@ $container->add(SessionAuthInterface::class, SessionAuthentication::class)
 
 $container->add(ExtractRouteInfo::class)
     ->addArgument(new ArrayArgument($routes));
+
 
 
 return $container;

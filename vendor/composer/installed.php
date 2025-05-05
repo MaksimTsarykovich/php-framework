@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '56dd822175917da0c73471d1e1b40d4268aaade6',
+        'reference' => 'd3fb0a8f8ab26b0240d64126d6827272454a7d11',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '56dd822175917da0c73471d1e1b40d4268aaade6',
+            'reference' => 'd3fb0a8f8ab26b0240d64126d6827272454a7d11',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -160,7 +160,7 @@
         'tmi/php-framework' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a012cf1362458d9cad715e6fd5e306a315a56d06',
+            'reference' => '5fe493403adb9da363d93c7e46aca1944f5961e6',
             'type' => 'project',
             'install_path' => __DIR__ . '/../tmi/php-framework',
             'aliases' => array(),
