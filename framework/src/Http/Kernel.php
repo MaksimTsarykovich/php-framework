@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Tmi\Framework\Http;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Tools\DsnParser;
 use League\Container\Container;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Tmi\Framework\Http\Events\ResponseEvent;
 use Tmi\Framework\Http\Exceptions\HttpException;
 use Tmi\Framework\Http\Middleware\RequestHandlerInterface;
-use Tmi\Framework\Routing\Router;
 
 class Kernel
 {
     private string $appEnv;
 
     public function __construct(
-        private Router                  $router,
-        private Container               $container,
-        private RequestHandlerInterface $requestHandler,
+        private readonly Container                $container,
+        private readonly RequestHandlerInterface  $requestHandler,
+        private readonly EventDispatcherInterface $eventDispatcher,
     )
     {
         $this->appEnv = $this->container->get('APP_ENV');
@@ -32,6 +31,8 @@ class Kernel
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
+
+        $this->eventDispatcher->dispatch(new ResponseEvent($request, $response));
 
         return $response;
     }

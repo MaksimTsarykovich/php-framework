@@ -3,21 +3,21 @@
 namespace App\Services;
 
 use App\Entities\User;
-use Doctrine\DBAL\Connection;
 use Tmi\Framework\Authentication\AuthUserInterface;
 use Tmi\Framework\Authentication\UserServiceInterface;
+use Tmi\Framework\Dbal\EntityService;
 
 class UserService implements UserServiceInterface
 {
     public function __construct(
-        private Connection $connection,
+        private EntityService $service,
     )
     {
     }
 
     public function store(User $user): User
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder = $this->service->getConnection()->createQueryBuilder();
 
         $queryBuilder
             ->insert('users')
@@ -35,7 +35,7 @@ class UserService implements UserServiceInterface
                 'created_at' => $user->getCreatedAt()->format('Y-m-d H:i:s'),
             ])
             ->executeQuery();
-        $id = $this->connection->lastInsertId();
+        $id = $this->service->save($user);
 
         $user->setId($id);
 
@@ -44,7 +44,7 @@ class UserService implements UserServiceInterface
 
     public function findByEmail(string $email): ?AuthUserInterface
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder = $this->service->getConnection()->createQueryBuilder();
         $result = $queryBuilder
             ->select('*')
             ->from('users')

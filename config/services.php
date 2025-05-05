@@ -15,6 +15,7 @@ use Tmi\Framework\Console\Application;
 use Tmi\Framework\Console\Commands\MigrateCommand;
 use Tmi\Framework\Controller\AbstractController;
 use Tmi\Framework\Dbal\ConnectionFactory;
+use Tmi\Framework\Event\EventDispatcher;
 use Tmi\Framework\Http\Kernel;
 use Tmi\Framework\Http\Middleware\ExtractRouteInfo;
 use Tmi\Framework\Http\Middleware\RequestHandler;
@@ -53,11 +54,13 @@ $container->add(RouteInterface::class, Router::class);
 $container->add(RequestHandlerInterface::class, RequestHandler::class)
     ->addArgument($container);
 
+$container->addShared(EventDispatcher::class);
+
 $container->add(Kernel::class)
     ->addArguments([
-        RouteInterface::class,
         $container,
         RequestHandlerInterface::class,
+        EventDispatcher::class
     ]);
 
 

@@ -13,7 +13,7 @@ class RedirectResponse extends Response
 
     public function send():void
     {
-        header("Location: {$this->getHeaders('location')}", true, $this->getStatusCode());
+        header("Location: {$this->getHeader('location')}", true, $this->getStatusCode());
         exit();
     }
 

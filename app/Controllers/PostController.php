@@ -34,8 +34,8 @@ class PostController extends AbstractController
     public function store()
     {
         $post = Post::create(
-            $this->request->postData['title'],
-            $this->request->postData['content']
+            $this->request->input('title'),
+            $this->request->input('content')
         );
 
         $post = $this->service->save($post);
